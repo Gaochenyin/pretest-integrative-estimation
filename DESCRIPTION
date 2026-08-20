@@ -1,0 +1,11 @@
+Package: pretestTAP
+Type: Package
+Title: Test-and-Pool (TAP) Integrative Estimation
+Version: 0.1.0
+Authors@R: person(given = "Gaochenyin", family = "Gao", email = "781747089@qq.com", role = c("aut", "cre"))
+Description: Functions to simulate data and perform the TAP estimator for integrating probability and non-probability samples. The code reproduces the results from the paper "Pretest estimation in combining probability and non-probability samples".
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/Gaochenyin/pretest-integrative-estimation
+
