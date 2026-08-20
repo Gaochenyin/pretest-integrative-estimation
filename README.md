@@ -31,11 +31,19 @@ Quick start examples
 
    Rscript sim_tap.R
 
+Why the R/ directory and inst/scripts/ are both present
+- R/: contains the package's R source files that are built and installed as the package API. Place core functions you want available via library(pretestTAP) here (for example, GenerateSimuDta and the analytic helpers).
+- inst/scripts/: contains example scripts that are shipped with the installed package. Files here are copied into the installed package under <installed-package>/scripts/ and can be found at runtime with system.file('scripts', 'your_script.R', package = 'pretestTAP').
+
+Practical note on the two sim_tap.R files in this repo
+- Canonical (full) driver: the top-level sim_tap.R in the repository is the full simulation driver used during development and to reproduce the paper figures.
+- Installed wrapper: inst/scripts/sim_tap.R is a lightweight wrapper (installed with the package). It intentionally avoids duplicating the full driver so the two copies don't drift; when you clone the repository you can run the full sim_tap.R directly, and the installed wrapper will instruct users how to run the canonical script or run a short demo when appropriate.
+
 Repository layout
 ```text
-R/                 # Core implementation (tap_functions.R) with GenerateSimuDta, TAP.Est, and analytic helpers
-inst/scripts/      # Example scripts installed with the package (inst/scripts/sim_tap.R)
-sim_tap.R          # Canonical simulation driver used to reproduce figures and experiments
+R/                 # Core implementation (tap_functions.R) with GenerateSimuDta, TAP.Est (stub for installed package), and analytic helpers
+inst/scripts/      # Installed wrapper scripts (inst/scripts/sim_tap.R) that point to the canonical driver or provide brief demos
+sim_tap.R          # Canonical simulation driver used to reproduce figures and experiments (development)
 DESCRIPTION         # R package metadata
 NAMESPACE           # R package namespace
 README.md           # This file
@@ -44,15 +52,24 @@ README.md           # This file
 Important files and functions
 - R/tap_functions.R: main implementation. Key exported functions include:
   - GenerateSimuDta(...): create a synthetic population and draw samples A (probability) and B (non-probability).
-  - TAP.Est(...): main estimator and inference routine (propensity estimation, point estimation, bootstrap, adaptive CI). This function is large and documented inside the R source.
+  - TAP.Est(...): main estimator and inference routine (propensity estimation, point estimation, bootstrap, adaptive CI) — note: the installed package may contain a lightweight stub; to use the full implementation, run the repository version or load the package from the project root during development.
   - LambdaCgammaMSE, LambdaCgammaMSE.MC, OptimLambdaCgamma.MC: analytic and Monte Carlo routines for evaluating/optimizing lambda and c_gamma tuning parameters.
   - NormalTruncatedFirstMom / NormalTruncatedSecondMom: helpers used in analytic bias/variance expressions.
 
-Reproducing the paper figures and results
-- The top-level sim_tap.R script runs examples that produce:
-  - plot_mse_lambda_c_gamma.png (3-panel MSE surface)
-  - HT_plot.png (illustration for adaptive confidence intervals)
-  - Monte Carlo simulation results saved/aggregated within the script (see sim_tap.R for details)
+How to run the canonical simulation driver (from a clone)
+```bash
+# clone the repo
+git clone https://github.com/Gaochenyin/pretest-integrative-estimation.git
+cd pretest-integrative-estimation
+# run the full driver (this may take a long time depending on B/K and niter)
+Rscript sim_tap.R
+```
+
+How to run the installed wrapper (after remotes::install_github)
+```r
+# run the lightweight wrapper included in the installed package
+Rscript -e "library(pretestTAP); source(system.file('scripts', 'sim_tap.R', package = 'pretestTAP'))"
+```
 
 Development notes
 - This package is intentionally minimal for development. To generate Rd documentation from roxygen comments run:
@@ -63,7 +80,7 @@ Development notes
 
    devtools::check()
 
-- Large functions (e.g., TAP.Est) are monolithic in this repository for readability; for CRAN submission consider splitting them into smaller helpers and adding more granular unit tests.
+- Large functions are separated in this repository for readability during development; for CRAN submission consider splitting them into smaller helpers and adding more granular unit tests.
 
 License and citation
 - License: MIT (see LICENSE file)
@@ -71,4 +88,3 @@ License and citation
 
 Contact
 - Author: Gaochenyin Gao (781747089@qq.com)
-
