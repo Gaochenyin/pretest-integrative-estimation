@@ -2,13 +2,13 @@
 
 An R package and set of scripts implementing the Test-and-Pool (TAP) integrative estimation method from the paper "Pretest estimation in combining probability and non-probability samples". The code provides tools to simulate synthetic populations, apply the TAP estimator to combine a probability sample (A) and a non-probability sample (B), and reproduce the figures and simulation results from the paper.
 
-Key features
+## Key features
 - Simulation utilities to generate synthetic populations and draw samples with different selection mechanisms.
 - Analytic expressions and Monte Carlo approximations for TAP bias, variance, and MSE.
 - A main TAP estimator (TAP.Est) that runs propensity estimation, point estimation, bootstrap inference, and adaptive confidence interval construction.
 - Example simulation driver that produces the figures used in the manuscript.
 
-Installation (development)
+## Installation (development)
 1. Install prerequisites (if needed):
    ```
    install.packages(c("devtools", "remotes"))
@@ -23,7 +23,7 @@ Installation (development)
    # from an R session in the project directory
    devtools::load_all('.')
    ```
-Quick start examples
+## Quick start examples
 - Run the provided example simulation (installed under inst/scripts):
    ```
    Rscript -e "library(pretestTAP); source(system.file('scripts', 'sim_tap.R', package = 'pretestTAP'))"
@@ -32,9 +32,9 @@ Quick start examples
    ```
    Rscript sim_tap.R
    ```
-License and citation
+## License and citation
 - License: MIT (see LICENSE file)
 - If you use this code in published work, please cite the accompanying paper "Pretest estimation in combining probability and non-probability samples" and include a reference to this GitHub repository.
 
-Contact
+## Contact
 - Author: Gaochenyin Gao (781747089@qq.com)
