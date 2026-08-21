@@ -17,11 +17,7 @@ An R package and set of scripts implementing the Test-and-Pool (TAP) integrative
 2. Install the package from GitHub (development version):
    ```
    remotes::install_github('Gaochenyin/pretest-integrative-estimation')
-   ```
-3. During development, load the package directly from the project root:
-   ```
-   # from an R session in the project directory
-   devtools::load_all('.')
+   library(pretestTAP)
    ```
 ## Quick start examples
 - Run the provided example simulation (installed under inst/scripts):
