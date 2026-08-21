@@ -28,9 +28,6 @@ An R package and set of scripts implementing the Test-and-Pool (TAP) integrative
    ```
    Rscript sim_tap.R
    ```
-## License and citation
-- License: MIT (see LICENSE file)
-- If you use this code in published work, please cite the accompanying paper "Pretest estimation in combining probability and non-probability samples" and include a reference to this GitHub repository.
-
-## Contact
+## Contact and citation
 - Author: Gaochenyin Gao (781747089@qq.com)
+- If you use this code in published work, please cite the accompanying paper "Pretest estimation in combining probability and non-probability samples" and include a reference to this GitHub repository.
